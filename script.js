@@ -270,3 +270,34 @@ document.addEventListener("DOMContentLoaded", () => {
         showToast("Buyurtmangiz qabul qilindi! Oshpazlar tayyorlashni boshlashdi.", "success");
     });
 });
+
+// Login Modal
+function openLogin() {
+    document.getElementById("loginModal").classList.add("active");
+}
+function closeLogin() {
+    document.getElementById("loginModal").classList.remove("active");
+}
+function fillLogin() {
+    document.getElementById("loginUsername").value = "User";
+    document.getElementById("loginPassword").value = "user1234";
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const loginForm = document.getElementById("loginForm");
+    if(loginForm) {
+        loginForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const user = document.getElementById("loginUsername").value;
+            const pass = document.getElementById("loginPassword").value;
+            
+            if(user === "User" && pass === "user1234") {
+                closeLogin();
+                document.getElementById("userProfileName").innerText = "User";
+                showToast("Tizimga muvaffaqiyatli kirdingiz!", "success");
+            } else {
+                showToast("Login yoki parol noto'g'ri!", "error");
+            }
+        });
+    }
+});
