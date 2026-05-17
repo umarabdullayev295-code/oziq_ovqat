@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TezYetkaz - Oziq-ovqat Yetkazib Berish</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#" class="logo"><i class="fas fa-hamburger"></i> Tez<span>Yetkaz</span></a>
+        
+        <div class="address-selector" onclick="openAddressModal()">
+            <i class="fas fa-map-marker-alt"></i>
+            <div class="address-info">
+                <span class="addr-label">Yetkazib berish manzili</span>
+                <span class="addr-value" id="currentAddress">Manzilni tanlang... <i class="fas fa-chevron-down"></i></span>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <i class="fas fa-search" style="color:var(--text-muted)"></i>
+            <input type="text" id="searchInput" placeholder="Taom yoki restoran qidiring...">
+        </div>
+
+        <div class="nav-actions">
+            <button class="nav-icon-btn" onclick="toggleFavorites()">
+                <i class="far fa-heart"></i>
+                <span class="cart-badge" id="favCount" style="background: #ef4444;">0</span>
+            </button>
+            <button class="cart-btn" id="openCartBtn">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-badge" id="cartCount">0</span>
+            </button>
+            <a href="#" class="btn-login"><i class="fas fa-user"></i> <span>Profil</span></a>
+        </div>
+    </nav>
+
+    <!-- Mobile Search (Visible only on mobile) -->
+    <div class="mobile-search">
+        <div class="search-box mobile-search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="mobileSearchInput" placeholder="Taom yoki restoran qidiring...">
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Sevimli taomlaringiz <span>uyingizgacha</span> yetkaziladi</h1>
+            <p>Eng yaxshi restoranlardan buyurtma bering. Birinchi buyurtmangiz uchun yetkazib berish bepul!</p>
+            <div class="hero-badges">
+                <span><i class="fas fa-clock"></i> 30-40 daq</span>
+                <span><i class="fas fa-motorcycle"></i> Tezkor</span>
+                <span><i class="fas fa-star"></i> 4.8 / 5</span>
+            </div>
+        </div>
+        <div class="hero-img">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Mazali taomlar">
+        </div>
+    </section>
+
+    <!-- Promos / Banners -->
+    <div class="promos-container">
+        <div class="promo-card" style="background: linear-gradient(to right, #fecaca, #fca5a5);">
+            <div class="promo-info">
+                <h3>Yangi Burger!</h3>
+                <p>20% Chegirma</p>
+            </div>
+            <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png" alt="Burger">
+        </div>
+        <div class="promo-card" style="background: linear-gradient(to right, #bbf7d0, #86efac);">
+            <div class="promo-info">
+                <h3>Sog'lom Ovqat</h3>
+                <p>Fitnes menyu</p>
+            </div>
+            <img src="https://cdn-icons-png.flaticon.com/512/2515/2515183.png" alt="Salad">
+        </div>
+        <div class="promo-card" style="background: linear-gradient(to right, #fef08a, #fde047);">
+            <div class="promo-info">
+                <h3>Shirinliklar</h3>
+                <p>Barcha pishiriqlarga 1+1</p>
+            </div>
+            <img src="https://cdn-icons-png.flaticon.com/512/2618/2618151.png" alt="Dessert">
+        </div>
+    </div>
+
+    <h2 class="section-title">Nimani xohlaysiz?</h2>
+    <div class="categories">
+        <div class="category-card active" onclick="filterMenu('all', this)">
+            <img src="https://cdn-icons-png.flaticon.com/512/706/706956.png" width="40" alt="Barchasi">
+            <h3>Barchasi</h3>
+        </div>
+        <div class="category-card" onclick="filterMenu('fastfood', this)">
+            <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png" width="40" alt="Fast Food">
+            <h3>Fast Food</h3>
+        </div>
+        <div class="category-card" onclick="filterMenu('milliy', this)">
+            <img src="https://cdn-icons-png.flaticon.com/512/3480/3480808.png" width="40" alt="Milliy">
+            <h3>Milliy Taomlar</h3>
+        </div>
+        <div class="category-card" onclick="filterMenu('pizza', this)">
+            <img src="https://cdn-icons-png.flaticon.com/512/1404/1404945.png" width="40" alt="Pitsa">
+            <h3>Pitsa</h3>
+        </div>
+        <div class="category-card" onclick="filterMenu('sushi', this)">
+            <img src="https://cdn-icons-png.flaticon.com/512/2254/2254452.png" width="40" alt="Sushi">
+            <h3>Sushi</h3>
+        </div>
+        <div class="category-card" onclick="filterMenu('shirinlik', this)">
+            <img src="https://cdn-icons-png.flaticon.com/512/2618/2618151.png" width="40" alt="Shirinlik">
+            <h3>Shirinliklar</h3>
+        </div>
+    </div>
+
+    <div class="section-header">
+        <h2 class="section-title" id="menu">Restoranlar va Taomlar</h2>
+        <div class="sort-dropdown">
+            <select id="sortSelect" onchange="sortProducts()">
+                <option value="popular">Eng mashhur</option>
+                <option value="price_asc">Arzonlari oldin</option>
+                <option value="price_desc">Qimmatlari oldin</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="products-grid" id="productsGrid">
+        <!-- JS fills this -->
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>Savat</h2>
+            <button class="close-cart" id="closeCartBtn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItemsContainer">
+            <p style="text-align:center; color: var(--text-muted); margin-top: 2rem;">Savatingiz bo'sh. Mazali taomlar qo'shing!</p>
+        </div>
+        <div class="cart-summary" id="cartSummary" style="display: none;">
+            <div class="summary-line">
+                <span>Taomlar:</span>
+                <span id="cartSubtotal">0 so'm</span>
+            </div>
+            <div class="summary-line">
+                <span>Yetkazib berish:</span>
+                <span id="deliveryFee">15,000 so'm</span>
+            </div>
+            <p class="free-delivery-hint" id="freeDeliveryHint">Yana 50,000 so'mlik taom qo'shing va yetkazib berish bepul!</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Jami to'lov:</span>
+                <span id="cartTotalSum">0 so'm</span>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn" onclick="openCheckout()">Buyurtma berish</button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal-box">
+            <button class="close-modal" onclick="closeCheckout()"><i class="fas fa-times"></i></button>
+            <h2>Buyurtmani rasmiylashtirish</h2>
+            <form id="checkoutForm">
+                <div class="input-group">
+                    <label>Ismingiz</label>
+                    <input type="text" placeholder="Ism va familiya" required>
+                </div>
+                <div class="input-group">
+                    <label>Telefon raqam</label>
+                    <input type="text" placeholder="+998" required>
+                </div>
+                <div class="input-group">
+                    <label>Manzil</label>
+                    <input type="text" id="checkoutAddress" placeholder="Ko'cha, uy raqami, xonadon" required>
+                </div>
+                <div class="input-group">
+                    <label>To'lov usuli</label>
+                    <div class="payment-options">
+                        <label class="pay-opt active"><input type="radio" name="payment" value="cash" checked> Naqd pul</label>
+                        <label class="pay-opt"><input type="radio" name="payment" value="card"> Plastik karta</label>
+                    </div>
+                </div>
+                <button type="submit" class="checkout-btn" style="margin-top:1rem;">Tasdiqlash (<span id="modalTotalSum">0</span> so'm)</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Address Modal -->
+    <div class="modal-overlay" id="addressModal">
+        <div class="modal-box">
+            <button class="close-modal" onclick="closeAddressModal()"><i class="fas fa-times"></i></button>
+            <h2>Manzilni kiriting</h2>
+            <div class="input-group" style="margin-top: 1rem;">
+                <input type="text" id="newAddressInput" placeholder="Toshkent sh., Yunusobod...">
+            </div>
+            <button class="checkout-btn" onclick="saveAddress()">Saqlash</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
