@@ -1,4 +1,4 @@
-const products = [
+﻿const products = [
     { id: 1, name: "Max Burger & Fri", rest: "MaxWay", category: "fastfood", price: 45000, img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60", rating: 4.8, isFav: false, discount: true },
     { id: 2, name: "Choyxona Palov", rest: "Besh Qozon", category: "milliy", price: 35000, img: "https://images.unsplash.com/photo-1574484284002-952d92456975?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60", rating: 4.9, isFav: false, discount: false },
     { id: 3, name: "Pepperoni Pitsa", rest: "Bellissimo", category: "pizza", price: 65000, img: "https://images.unsplash.com/photo-1628840042765-356cda07504e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60", rating: 4.7, isFav: false, discount: false },
@@ -267,7 +267,10 @@ document.addEventListener("DOMContentLoaded", () => {
         cart = [];
         updateCart();
         
-        showToast("Buyurtmangiz qabul qilindi! Oshpazlar tayyorlashni boshlashdi.", "success");
+        showToast("Buyurtma rasmiylashtirildi!", "success");
+        setTimeout(() => {
+            startOrderSimulation();
+        }, 800);
     });
 });
 
@@ -301,3 +304,47 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+// Order Tracking Simulation
+let trackingInterval;
+
+function openTracking() {
+    document.getElementById("trackingModal").classList.add("active");
+}
+function closeTracking() {
+    document.getElementById("trackingModal").classList.remove("active");
+}
+
+function startOrderSimulation() {
+    openTracking();
+    const steps = [1, 2, 3, 4];
+    let currentStep = 1;
+    
+    // Reset
+    steps.forEach(s => {
+        document.getElementById("step" + s).className = "timeline-step";
+        document.getElementById("time" + s).innerText = "";
+    });
+    
+    // Set initial step
+    document.getElementById("step1").classList.add("active");
+    
+    clearInterval(trackingInterval);
+    trackingInterval = setInterval(() => {
+        const now = new Date();
+        const timeStr = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
+        
+        document.getElementById("step" + currentStep).classList.remove("active");
+        document.getElementById("step" + currentStep).classList.add("completed");
+        document.getElementById("time" + currentStep).innerText = timeStr;
+        
+        currentStep++;
+        
+        if (currentStep <= 4) {
+            document.getElementById("step" + currentStep).classList.add("active");
+        } else {
+            clearInterval(trackingInterval);
+            showToast("Buyurtmangiz yetkazildi. Yoqimli ishtaha!", "success");
+        }
+    }, 4000); // Har 4 soniyada keyingi bosqichga o'tadi (test uchun)
+}

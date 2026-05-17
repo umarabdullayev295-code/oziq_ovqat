@@ -38,7 +38,7 @@
                 <i class="fas fa-shopping-bag"></i>
                 <span class="cart-badge" id="cartCount">0</span>
             </button>
-            <button class="btn-login" onclick="openLogin()"><i class="fas fa-user"></i> <span id="userProfileName">Profil</span></button>
+            <button class="nav-icon-btn" onclick="openTracking()" title="Buyurtmalar monitoringi"><i class="fas fa-motorcycle"></i></button> <button class="btn-login" onclick="openLogin()"><i class="fas fa-user"></i> <span id="userProfileName">Profil</span></button>
         </div>
     </nav>
 
@@ -228,7 +228,62 @@
             </form>
         </div>
     </div>
+        <!-- Order Tracking Modal -->
+    <div class="modal-overlay" id="trackingModal">
+        <div class="modal-box tracking-modal">
+            <button class="close-modal" onclick="closeTracking()"><i class="fas fa-times"></i></button>
+            <div class="tracking-header">
+                <h2>Buyurtma kuzatuvi</h2>
+                <p>Buyurtma raqami: <span class="order-id">#ORD-9284</span></p>
+            </div>
+            
+            <div class="timeline" id="orderTimeline">
+                <div class="timeline-step" id="step1">
+                    <div class="step-icon"><i class="fas fa-clipboard-check"></i></div>
+                    <div class="step-content">
+                        <h4>Qabul qilindi</h4>
+                        <p>Buyurtmangiz restoran tomonidan qabul qilindi</p>
+                        <div class="step-time" id="time1"></div>
+                    </div>
+                </div>
+                <div class="timeline-step" id="step2">
+                    <div class="step-icon"><i class="fas fa-fire"></i></div>
+                    <div class="step-content">
+                        <h4>Tayyorlanmoqda</h4>
+                        <p>Oshpazlar taomingizni tayyorlashni boshlashdi</p>
+                        <div class="step-time" id="time2"></div>
+                    </div>
+                </div>
+                <div class="timeline-step" id="step3">
+                    <div class="step-icon"><i class="fas fa-motorcycle"></i></div>
+                    <div class="step-content">
+                        <h4>Yo'lda</h4>
+                        <p>Kuryer buyurtmani olib yo'lga chiqdi</p>
+                        <div class="step-time" id="time3"></div>
+                    </div>
+                </div>
+                <div class="timeline-step" id="step4">
+                    <div class="step-icon"><i class="fas fa-home"></i></div>
+                    <div class="step-content">
+                        <h4>Yetkazildi</h4>
+                        <p>Yoqimli ishtaha!</p>
+                        <div class="step-time" id="time4"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem; padding: 1rem; background: #f8fafc; border-radius: 12px; display: flex; align-items: center; gap: 1rem; border: 1px solid var(--border);">
+                <img src="https://cdn-icons-png.flaticon.com/512/3063/3063822.png" alt="Courier" style="width: 50px; height: 50px; border-radius: 50%; background: white; padding: 5px;">
+                <div style="flex: 1;">
+                    <h4 style="font-size: 0.95rem;">Azizbek Kuryer</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">+998 90 123 45 67</p>
+                </div>
+                <button class="nav-icon-btn" style="background: var(--primary); color: white;" onclick="alert('Kuryerga qo\'ng\'iroq qilinmoqda...')"><i class="fas fa-phone-alt"></i></button>
+            </div>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
+
 
